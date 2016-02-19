@@ -94,11 +94,6 @@ body {
     margin-bottom: 1em;
 }
 
-.installed-app .btn-block {
-    margin-top: 7.5px;
-    margin-bottom: 7.5px;
-}
-
-.installed-dev .panel-heading {
-    display: block;
+pre, pre code {
+    color: black;
 }
