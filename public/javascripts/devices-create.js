@@ -6,7 +6,6 @@ $(function() {
 
         switch(json.type) {
         case 'form':
-            placeholder.append($('<input>').attr('type', 'hidden').attr('name', 'kind').attr('value', kind));
             json.fields.forEach(function(field) {
                 var input = $('<input>').addClass('form-control')
                     .attr('type', field.type).attr('name', field.name);
@@ -45,6 +44,7 @@ $(function() {
             form.addClass('online-account-expander collapse');
             form.attr('id', 'online-account-' + kind);
             form.attr('aria-expanded', 'false');
+            form.append($('<input>').attr('type', 'hidden').attr('name', 'kind').attr('value', kind));
 
             json.fields.forEach(function(field) {
                 var input = $('<input>').addClass('form-control')
