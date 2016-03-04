@@ -77,11 +77,9 @@ $(function() {
         return self;
     }
 
-    $('#online-account-selector').each(function() {
-        var selector = $(this);
-
+    function handleOnlineLike(selector, klass) {
         var developerKey = $('#developer-key').text();
-        var url = ThingEngine.getThingPedia() + '/thingpedia/api/devices?class=online&developer_key='
+        var url = ThingEngine.getThingPedia() + '/thingpedia/api/devices?class=' + klass + '&developer_key='
             + developerKey;
         $.get(url, function(factoryList) {
             for (var i = 0; i < factoryList.length; i += 3) {
@@ -94,6 +92,15 @@ $(function() {
                 }
             }
         });
+    }
+
+    $('#online-account-selector').each(function() {
+        var selector = $(this);
+        handleOnlineLike(selector, 'online');
+    });
+    $('#data-source-selector').each(function() {
+        var selector = $(this);
+        handleOnlineLike(selector, 'data');
     });
 
     $('#device-kind').each(function() {

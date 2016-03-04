@@ -8,21 +8,29 @@ block scripts
   script(src='/javascripts/devices-create.js')
 
 block page_name
-  if onlineAccounts
+  if klass === 'online'
     | New Account
+  else if klass === 'data'
+    | New Data Source
   else
     | New Device
 
 block content
-  if onlineAccounts
-    p What account do you want to set up?
+  if klass === 'online' || klass === 'data'
+    if klass === 'online'
+      p What account do you want to set up?
+    else
+      p What data source do you want to set up?
 
-    form(action="/devices/create?class=online", method="post")
+    form(action="/devices/create", method="post")
       input(type='hidden',name='_csrf',value=csrfToken)
 
-      div#online-account-selector.container
+      if klass === 'online'
+        div#online-account-selector.container
+      else
+        div#data-source-selector.container
   else
-    form(action="/devices/create?class=physical", method="post")
+    form(action="/devices/create", method="post")
       input(type='hidden',name='_csrf',value=csrfToken)
 
       div.form-group
