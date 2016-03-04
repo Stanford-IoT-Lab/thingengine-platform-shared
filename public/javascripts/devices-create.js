@@ -13,6 +13,8 @@ $(function() {
                 var div = $('<div>').addClass('form-group').append(label).append(input);
                 placeholder.append(div);
             });
+            // fallthrough
+        case 'none':
             placeholder.append($('<button>').addClass('btn btn-primary')
                                .attr('type', 'submit').text("Configure"));
             break;
@@ -33,7 +35,11 @@ $(function() {
         var self = $('<div>');
         self.addClass('online-account-choice col-md-4');
 
-        var btn = $('<a>');
+        if (json.type === 'none') {
+            var btn = $('<button>').attr('type', 'submit').attr('name', 'kind').attr('value', kind);
+        } else {
+            var btn = $('<a>');
+        }
         btn.addClass('btn btn-default btn-block');
         btn.text(name);
         self.append(btn);
@@ -44,7 +50,6 @@ $(function() {
             form.addClass('online-account-expander collapse');
             form.attr('id', 'online-account-' + kind);
             form.attr('aria-expanded', 'false');
-            form.append($('<input>').attr('type', 'hidden').attr('name', 'kind').attr('value', kind));
 
             json.fields.forEach(function(field) {
                 var input = $('<input>').addClass('form-control')
@@ -54,6 +59,7 @@ $(function() {
                 form.append(div);
             });
             form.append($('<button>').addClass('btn btn-primary')
+                        .attr('name', 'kind').attr('value', kind)
                         .attr('type', 'submit').text("Configure"));
             btn.attr('data-toggle', 'online-account-' + kind);
             form.collapse('hide');
