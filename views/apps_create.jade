@@ -40,14 +40,5 @@ block content
           for f in omlet.feeds
             option(value=f.identifier, selected=omlet.feedId === f.identifier)= f.name
 
-    input(type='hidden', name='tier', value=tier)
-    //p.form-group
-      h3
-        label.control-label(for="tier") Run in
-      select#tier(name="tier").form-control
-        option(value="phone",selected=(tier==='phone')) Phone
-        option(value="server",selected=(tier==='server')) Server
-        option(value="cloud",selected=(tier==='cloud')) Cloud
-
     p.from-group
       button(type="submit").btn.btn-success Create

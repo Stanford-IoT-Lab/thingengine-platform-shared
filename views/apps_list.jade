@@ -30,7 +30,7 @@ block content
 
               div.form-group
                 button(type='submit').btn.btn-success Yes, share it
-                |  
+                | &#x20;
                 a.btn.btn-default(data-dismiss='modal') No, thanks
 
   if message
@@ -54,13 +54,17 @@ block content
           div.panel-heading
             h2.panel-title= app.name
           div.panel-body
-            if app.running
-              p This app is running.
-            else
-              if app.enabled
-                p This app is enabled but not running.
+            if app.error
+              p This app had an error: #{app.error}
+            else if app.running
+              if app.feed
+                p This app is running in the chat room #{app.feed.name}.
               else
-                p This app is enabled for #{app.currentTier}.
+                p This app is running.
+            else if app.enabled
+              p This app is enabled but not running.
+            else
+              p This app is enabled for #{app.currentTier}.
 
           div.panel-footer
             div.row
