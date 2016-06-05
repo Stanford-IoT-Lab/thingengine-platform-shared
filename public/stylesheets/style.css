@@ -86,7 +86,7 @@ body {
     font-style: italic;
 }
 
-#app-install-well .btn {
+#app-install-well .btn, #show-hide-code .btn {
     margin-bottom: 1em;
 }
 
