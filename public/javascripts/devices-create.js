@@ -27,6 +27,8 @@ $(function() {
                                                .attr('href', '/devices/oauth2/' + kind)
                                                .text(json.text)));
             break;
+        default: // discovery or builtin, ignore
+            break;
         }
     }
 
@@ -72,6 +74,8 @@ $(function() {
         case 'oauth2':
             btn.attr('href', '/devices/oauth2/' + kind);
             break;
+        default: // discovery or builtin, ignore
+            break;
         }
 
         return self;
@@ -113,6 +117,8 @@ $(function() {
         $.get(url, function(factoryList) {
             factoryList.forEach(function(f) {
                 deviceFactories[f.primary_kind] = f.factory;
+                if (f.factory.type === 'discovery') // ignore discovery types online
+                    return;
 
                 selector.append(function() {
                     var self = $('<option>');
